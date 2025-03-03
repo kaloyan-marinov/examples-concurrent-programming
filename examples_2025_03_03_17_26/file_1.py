@@ -23,8 +23,8 @@ def gen_fake_data(filenames):
 
 def gen_wav_file(filename: str, frequency: float, duration: float):
     samplerate = 44100
-    t = np.linspace(0., duration, int(duration * samplerate))
-    data = np.sin(2. * np.pi * frequency * t) * 0.0
+    t = np.linspace(0.0, duration, int(duration * samplerate))
+    data = np.sin(2.0 * np.pi * frequency * t) * 0.0
     scipy.io.wavfile.write(filename, samplerate, data.astype(np.float32))
 
 
@@ -34,7 +34,7 @@ def etl(filename: str) -> tuple[str, float]:
     samplerate, data = scipy.io.wavfile.read(filename)
 
     # do some transform
-    eps = .1
+    eps = 0.1
     data += np.random.normal(scale=eps, size=len(data))
     data = np.clip(data, -1.0, 1.0)
 
@@ -118,5 +118,5 @@ def main():
     # compare_mp_map_to_normal()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
