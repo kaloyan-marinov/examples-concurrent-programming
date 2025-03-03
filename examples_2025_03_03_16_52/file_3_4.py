@@ -34,9 +34,9 @@ from examples_2025_03_03_15_36.file_1 import do_something
 if __name__ == "__main__":
 
     time_start = time.perf_counter()
-    with concurrent.futures.ProcessPoolExecutor(max_workers=10) as t_p_e:
+    with concurrent.futures.ProcessPoolExecutor(max_workers=10) as p_p_e:
         # Schedule several executions of a function.
-        futures = [t_p_e.submit(do_something, 1.4) for _ in range(10)]
+        futures = [p_p_e.submit(do_something, 1.4) for _ in range(10)]
 
         # The following iterator yields the results of the processes,
         # as they are completed.
