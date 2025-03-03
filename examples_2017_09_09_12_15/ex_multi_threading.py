@@ -22,7 +22,7 @@ def print_squares(numbers):
 
     for x in numbers:
         time.sleep(ARTIFICIAL_TIME_LAG)
-        y = x ** 2
+        y = x**2
         print("square: %.5f" % y)
 
 
@@ -31,7 +31,7 @@ def print_cubes(numbers):
 
     for x in numbers:
         time.sleep(ARTIFICIAL_TIME_LAG)
-        y = x ** 3
+        y = x**3
         print("cube: %.5f" % y)
 
 

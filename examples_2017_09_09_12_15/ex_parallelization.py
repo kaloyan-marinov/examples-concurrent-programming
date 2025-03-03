@@ -2,6 +2,7 @@
 Source:     Multiprocessing in Python - Rudy Gilmore, Data Scientist, TrueCar
             https://www.youtube.com/watch?v=X2mO1O5Nuwg
 """
+
 # TODO: look into threads, processes, and Python's GIL
 
 
@@ -19,7 +20,7 @@ INDICES_OF_DESIRED_PRIMES = [i + IND_OF_PRIME_NUM for i in range(4)]
 
 
 def is_prime(x):
-    sqrt_of_x = int(x ** 0.5) + 1
+    sqrt_of_x = int(x**0.5) + 1
 
     for cur_integer in range(2, sqrt_of_x):
         if x % cur_integer == 0:
@@ -56,8 +57,7 @@ def get_nth_prime(n, q=None):
 
 
 def main(verbose=False, debug=False):
-    """
-    """
+    """ """
 
     timer = Timer()
 
@@ -131,9 +131,10 @@ def main(verbose=False, debug=False):
         print(results)
         print(timer.build_report_of_totals())
 
+
 # END: function definitions
 # -------------------------
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(verbose=True, debug=True)

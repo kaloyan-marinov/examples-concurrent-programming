@@ -8,8 +8,12 @@ class Timer(object):
     between calls to the start() and stop() methods.
     """
 
-    report_str = "cpu : %.5f" + "\n" + \
-                 "wall: %.5f"
+    report_str = "\n".join(
+        [
+            "cpu : %.5f",
+            "wall: %.5f",
+        ]
+    )
 
     def __init__(self):
         self.total_cpu = None
