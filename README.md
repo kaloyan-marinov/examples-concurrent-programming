@@ -51,3 +51,17 @@ the source for everything within `examples-concurrent-programming/examples_2025_
 each script within that folder has a docstring,
 which contains an example of how to run that script
 ```
+
+```
+the source for everything within `examples-concurrent-programming/examples_2025_03_03_17_26/` is:
+(
+    youtube
+    >>
+    mCoding
+    >>
+    Unlocking the CPU cores in Python (multiprocessing)
+)
+
+each script within that folder has a docstring,
+which contains an example of how to run that script
+```
