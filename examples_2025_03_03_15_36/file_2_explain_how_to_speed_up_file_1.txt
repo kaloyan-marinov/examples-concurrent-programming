@@ -1,0 +1,61 @@
+source:
+(
+    youtube
+    >>
+    Corey Schafer
+    >>
+    Python Threading Tutorial: Run Code Concurrently Using the Threading Module
+)
+
+
+
+in the context of concurrent programming,
+it is typical to draw a distinction between the following types of tasks:
+(a) CPU-bound tasks
+(b) Input/Output-bound tasks (= IO-bound tasks)
+
+
+
+examples of (a) are
+things that are crunching a lot of numbers and using the CPU
+
+examples of (b) are
+things that are just waiting for input and output operations to be completed
+[without] really using the CPU all that much
+
+    reading from the filesystem
+
+    writing to the filesystem
+
+    network operations
+
+    downloading things from an online resource [= a remote resource]
+
+
+
+when it comes to threading,
+we are going to see benefits
+when our tasks are IO-bound
+
+[by contrast,]
+if our tasks are doing a lot of data crunching
+[i.e. if they] are CPU-bound,
+then
+    
+    we're not gonna get that much of a benefit from using threading
+
+    as a matter of fact,
+    some programs actually run slower using threads
+    because of the added overhead cost when they're creating and destroying different threads
+
+    we'll likely want to use `multiprocessing` instead [of threads]
+
+
+
+[importantly,]
+when we run something concurrently using threads,
+it's not actually going to run the code at the same time -
+it just gives the illusion of running code at the same time,
+because when it comes to a point where it's just waiting around,
+it's just going to ... move forward with the script and run other code
+while the IO operations finish
