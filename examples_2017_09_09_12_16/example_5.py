@@ -26,7 +26,10 @@ class Consumer(multiprocessing.Process):
 
                 # carry out task_obj
                 print(task_obj.task_id)
-                print("%s: executing task_id=%r [task_obj.__str__() = %s]" % (subprocess_name, task_obj.task_id, task_obj))
+                print(
+                    "%s: executing task_id=%r [task_obj.__str__() = %s]"
+                    % (subprocess_name, task_obj.task_id, task_obj)
+                )
                 answer = task_obj()
                 self.task_tuple_queue.task_done()
                 self.proxy_for_task_id_2_task_obj[task_obj.task_id] = answer
@@ -43,10 +46,10 @@ class Task(object):
 
     def __call__(self):
         time.sleep(0.1)  # pretend to take some time to do the work
-        return '%s * %s = %s' % (self.a, self.b, self.a * self.b)
+        return "%s * %s = %s" % (self.a, self.b, self.a * self.b)
 
     def __str__(self):
-        return '%s * %s' % (self.a, self.b)
+        return "%s * %s" % (self.a, self.b)
 
 
 def main():
@@ -60,7 +63,10 @@ def main():
     # create and start consumer subprocesses
     num_consumers = multiprocessing.cpu_count() * 2
     print("creating %d consumer subprocesses" % num_consumers)
-    consumer_subprocesses = [Consumer(task_tuples, proxy_for_task_id_2_task_obj) for _ in range(num_consumers)]
+    consumer_subprocesses = [
+        Consumer(task_tuples, proxy_for_task_id_2_task_obj)
+        for _ in range(num_consumers)
+    ]
 
     for p in consumer_subprocesses:
         p.start()

@@ -41,6 +41,7 @@ def work_slowly():
     print(FORMAT_STRING.format("Exiting", curr_process.name))
     sys.stdout.flush()
 
+
 if __name__ == "__main__":
     print(FORMAT_STRING.format("state", "process name"))
     print(FORMAT_STRING.format("-----", "------------"))

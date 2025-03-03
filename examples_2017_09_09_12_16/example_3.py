@@ -22,13 +22,19 @@ def func_for_daemon_process():
     curr_process = multiprocessing.current_process()
 
     # print("Starting : %r, %r" % (curr_process.pid, curr_process.name))
-    print(THREE_PIECE_FORMAT_STRING.format("Starting", curr_process.pid, curr_process.name))
+    print(
+        THREE_PIECE_FORMAT_STRING.format(
+            "Starting", curr_process.pid, curr_process.name
+        )
+    )
     sys.stdout.flush()
 
     time.sleep(2)
 
     # print("Exiting  : %r, %r" % (curr_process.pid, curr_process.name))
-    print(THREE_PIECE_FORMAT_STRING.format("Exiting", curr_process.pid, curr_process.name))
+    print(
+        THREE_PIECE_FORMAT_STRING.format("Exiting", curr_process.pid, curr_process.name)
+    )
     sys.stdout.flush()
 
 
@@ -36,11 +42,17 @@ def func_for_non_daemon_process():
     curr_process = multiprocessing.current_process()
 
     # print("Starting : %r, %r" % (curr_process.pid, curr_process.name))
-    print(THREE_PIECE_FORMAT_STRING.format("Starting", curr_process.pid, curr_process.name))
+    print(
+        THREE_PIECE_FORMAT_STRING.format(
+            "Starting", curr_process.pid, curr_process.name
+        )
+    )
     sys.stdout.flush()
 
     # print("Exiting  : %r, %r" % (curr_process.pid, curr_process.name))
-    print(THREE_PIECE_FORMAT_STRING.format("Exiting", curr_process.pid, curr_process.name))
+    print(
+        THREE_PIECE_FORMAT_STRING.format("Exiting", curr_process.pid, curr_process.name)
+    )
     sys.stdout.flush()
 
 
@@ -54,10 +66,14 @@ def do_not_wait_for_daemon(func_for_daemon_proc, func_for_non_daemon_proc):
     print(THREE_PIECE_FORMAT_STRING.format("state", "process id (pid)", "process name"))
     print(THREE_PIECE_FORMAT_STRING.format("-----", "----------------", "------------"))
 
-    d = multiprocessing.Process(name="func_for_daemon_proc", target=func_for_daemon_proc)
+    d = multiprocessing.Process(
+        name="func_for_daemon_proc", target=func_for_daemon_proc
+    )
     d.daemon = True
 
-    n = multiprocessing.Process(name="func_for_non_daemon_proc", target=func_for_non_daemon_proc)
+    n = multiprocessing.Process(
+        name="func_for_non_daemon_proc", target=func_for_non_daemon_proc
+    )
     n.daemon = False
 
     d.start()
@@ -78,10 +94,14 @@ def do_wait_for_daemon_processes(func_for_daemon_proc, func_for_non_daemon_proc)
     print(THREE_PIECE_FORMAT_STRING.format("state", "process id (pid)", "process name"))
     print(THREE_PIECE_FORMAT_STRING.format("-----", "----------------", "------------"))
 
-    d = multiprocessing.Process(name="func_for_daemon_proc", target=func_for_daemon_proc)
+    d = multiprocessing.Process(
+        name="func_for_daemon_proc", target=func_for_daemon_proc
+    )
     d.daemon = True
 
-    n = multiprocessing.Process(name="func_for_non_daemon_proc", target=func_for_non_daemon_proc)
+    n = multiprocessing.Process(
+        name="func_for_non_daemon_proc", target=func_for_non_daemon_proc
+    )
     n.daemon = False
 
     d.start()
@@ -90,10 +110,11 @@ def do_wait_for_daemon_processes(func_for_daemon_proc, func_for_non_daemon_proc)
 
     # make the main process wait for the func_for_daemon_process to exit
     # (which will force the func_for_daemon_process process to print an “Exiting” message)
-    print('d.is_alive()', d.is_alive())
+    print("d.is_alive()", d.is_alive())
     d.join()
-    print('d.is_alive()', d.is_alive())
+    print("d.is_alive()", d.is_alive())
     n.join()
+
 
 if __name__ == "__main__":
     should_wait_for_daemon = False
@@ -107,4 +128,6 @@ if __name__ == "__main__":
         print("will wait for func_for_daemon_process process")
         print()
 
-        do_wait_for_daemon_processes(func_for_daemon_process, func_for_non_daemon_process)
+        do_wait_for_daemon_processes(
+            func_for_daemon_process, func_for_non_daemon_process
+        )

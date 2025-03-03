@@ -18,7 +18,7 @@ def exit_error():
 
 
 def raise_error():
-    raise RuntimeError('There was an error!')
+    raise RuntimeError("There was an error!")
 
 
 def function_to_manually_terminate():
@@ -46,13 +46,18 @@ if __name__ == "__main__":
     print(THREE_PIECE_FORMAT_STRING.format("JOINED:", str(p), p.is_alive()))
     # print("JOINED:", p, p.is_alive())
 
-
     print()
     print()
 
     processes = list()
-    for f in [return_null, return_value, exit_error, raise_error, function_to_manually_terminate]:
-        print('Starting process for', f.__name__)
+    for f in [
+        return_null,
+        return_value,
+        exit_error,
+        raise_error,
+        function_to_manually_terminate,
+    ]:
+        print("Starting process for", f.__name__)
         p = multiprocessing.Process(target=f, name=f.__name__)
         processes.append(p)
 
@@ -63,4 +68,4 @@ if __name__ == "__main__":
 
     for p in processes:
         p.join()
-        print('%s.exitcode = %s' % (p.name, p.exitcode))
+        print("%s.exitcode = %s" % (p.name, p.exitcode))

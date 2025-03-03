@@ -10,10 +10,9 @@ The "poison pill technique" is used to stop the workers:
     When a worker encounters the special value,
     it breaks out of its processing loop.
     
-The main process uses the task queue’s join() method to wait for all of the tasks to finish
+The main process uses the task queue's join() method to wait for all of the tasks to finish
 before processing the results.
 """
-
 
 import multiprocessing
 import time
@@ -66,8 +65,7 @@ if __name__ == "__main__":
     # Start consumers
     num_consumers = multiprocessing.cpu_count() * 2
     print("Creating %d consumers" % num_consumers)
-    consumers = [ConsumerProcess(tasks, results)
-                 for i in range(num_consumers)]
+    consumers = [ConsumerProcess(tasks, results) for i in range(num_consumers)]
     for w in consumers:
         w.start()
 
