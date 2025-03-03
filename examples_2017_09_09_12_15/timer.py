@@ -28,7 +28,7 @@ class Timer(object):
         self.total_wall = 0.0
 
     def start(self):
-        self.start_cpu = time.clock()
+        self.start_cpu = time.perf_counter()
         self.start_wall = time.time()
 
     def restart(self):
@@ -36,7 +36,7 @@ class Timer(object):
         self.start()
 
     def stop(self):
-        cpu_time_since_last_start = time.clock() - self.start_cpu
+        cpu_time_since_last_start = time.perf_counter() - self.start_cpu
         wall_time_since_last_start = time.time() - self.start_wall
 
         self.total_cpu += cpu_time_since_last_start
