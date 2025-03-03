@@ -12,7 +12,7 @@ from __future__ import division
 import threading
 import multiprocessing
 
-from timer import Timer
+from examples_2017_09_09_12_15.timer import Timer
 
 
 IND_OF_PRIME_NUM = 20000

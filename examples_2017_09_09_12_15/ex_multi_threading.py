@@ -11,7 +11,7 @@ Given a list of numbers:
 import time
 import threading
 
-from timer import Timer
+from examples_2017_09_09_12_15.timer import Timer
 
 
 ARTIFICIAL_TIME_LAG = 0.2
