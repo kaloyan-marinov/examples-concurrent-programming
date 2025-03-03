@@ -1,14 +1,3 @@
-source:
-(
-    youtube
-    >>
-    Corey Schafer
-    >>
-    Python Threading Tutorial: Run Code Concurrently Using the Threading Module
-)
-
-
-
 in the context of concurrent programming,
 it is typical to draw a distinction between the following types of tasks:
 (a) CPU-bound tasks

@@ -23,3 +23,17 @@ examples-concurrent-programming $ PYTHONPATH=. \
 
 # ...
 ```
+
+```
+the source for everything within `examples-concurrent-programming/examples_2025_03_03_15_36/` is:
+(
+    youtube
+    >>
+    Corey Schafer
+    >>
+    Python Threading Tutorial: Run Code Concurrently Using the Threading Module
+)
+
+each script within that folder has a docstring,
+which contains an example of how to run that script
+```

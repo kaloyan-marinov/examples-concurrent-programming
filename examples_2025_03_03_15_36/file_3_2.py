@@ -1,3 +1,20 @@
+"""
+examples-concurrent-programming $ PYTHONPATH=. \
+    python3 \
+    examples_2025_03_03_15_36/file_3_2.py
+starting to sleep for 1.2 second(s)
+starting to sleep for 1.2 second(s)
+starting to sleep for 1.2 second(s)
+starting to sleep for 1.2 second(s)
+starting to sleep for 1.2 second(s)
+starting to sleep for 1.2 second(s)
+starting to sleep for 1.2 second(s)
+starting to sleep for 1.2 second(s)
+starting to sleep for 1.2 second(s)
+starting to sleep for 1.2 second(s)
+the execution of the main script finished after 1.21 seconds(s)
+"""
+
 import threading
 import time
 

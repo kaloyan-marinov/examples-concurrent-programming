@@ -1,3 +1,30 @@
+"""
+examples-concurrent-programming $ PYTHONPATH=. \
+    python3 \
+    examples_2025_03_03_15_36/file_3_4.py
+starting to sleep for 1.4 second(s)
+starting to sleep for 1.4 second(s)
+starting to sleep for 1.4 second(s)
+starting to sleep for 1.4 second(s)
+starting to sleep for 1.4 second(s)
+starting to sleep for 1.4 second(s)
+starting to sleep for 1.4 second(s)
+starting to sleep for 1.4 second(s)
+starting to sleep for 1.4 second(s)
+starting to sleep for 1.4 second(s)
+slept for 1.4 second(s)
+slept for 1.4 second(s)
+slept for 1.4 second(s)
+slept for 1.4 second(s)
+slept for 1.4 second(s)
+slept for 1.4 second(s)
+slept for 1.4 second(s)
+slept for 1.4 second(s)
+slept for 1.4 second(s)
+slept for 1.4 second(s)
+the execution of the main script finished after 1.42 seconds(s)
+"""
+
 import concurrent.futures
 import time
 

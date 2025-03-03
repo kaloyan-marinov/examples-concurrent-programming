@@ -1,3 +1,12 @@
+"""
+examples-concurrent-programming $ PYTHONPATH=. \
+    python3 \
+    examples_2025_03_03_15_36/file_3_3.py
+starting to sleep for 1.3 second(s)
+slept for 1.3 second(s)
+the execution of the main script finished after 1.31 seconds(s)
+"""
+
 import concurrent.futures
 import time
 
