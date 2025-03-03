@@ -1,27 +1,41 @@
-from __future__ import annotations
-
-import os.path
+import os
+import multiprocessing
 import time
-from multiprocessing import Pool
 
 import numpy as np
 import scipy.io.wavfile
 
 
 def gen_fake_data(filenames):
+    """
+    Generate simple audio files.
+    Each is 4 minutes long.
+    """
+
     print("generating fake data")
     try:
         os.mkdir("sounds")
     except FileExistsError:
         pass
 
+    _frequency = 440
+
+    n_minutes = 4
+    seconds_in_a_minute = 60
+    _duration = seconds_in_a_minute * n_minutes
+
     for filename in filenames:  # homework: convert this loop to pool too!
         if not os.path.exists(filename):
             print(f"creating {filename}")
-            gen_wav_file(filename, frequency=440, duration=60.0 * 4)
+            gen_wav_file(filename, _frequency, _duration)
 
 
 def gen_wav_file(filename: str, frequency: float, duration: float):
+    """
+    Generate a simple audio file.
+
+    The file consists of a sine wave which is `duration` minutes long.
+    """
     samplerate = 44100
     t = np.linspace(0.0, duration, int(duration * samplerate))
     data = np.sin(2.0 * np.pi * frequency * t) * 0.0
@@ -29,6 +43,27 @@ def gen_wav_file(filename: str, frequency: float, duration: float):
 
 
 def etl(filename: str) -> tuple[str, float]:
+    """
+    ETL := Extract, Transform, Load
+
+    Obviously,
+    what this function does
+    isn't necessarily a very useful thing to do.
+
+    But please consider each of its steps
+    as just stand-ins for a real workflow:
+
+        (a)
+        extract data from some location
+        (be it a file, a database, or whatever)
+
+        (b)
+        do something useful to transform it in memory
+
+        (c)
+        take your transformed data and store it somewhere else
+    """
+
     # extract
     start_t = time.perf_counter()
     samplerate, data = scipy.io.wavfile.read(filename)
@@ -52,7 +87,7 @@ def etl_demo():
     start_t = time.perf_counter()
 
     print("starting etl")
-    with Pool() as pool:
+    with multiprocessing.Pool() as pool:
         results = pool.map(etl, filenames)
 
         for filename, duration in results:
@@ -76,7 +111,7 @@ def run_normal(items, do_work):
 def run_with_mp_map(items, do_work, processes=None, chunksize=None):
     print(f"running using multiprocessing with {processes=}, {chunksize=}")
     start_t = time.perf_counter()
-    with Pool(processes=processes) as pool:
+    with multiprocessing.Pool(processes=processes) as pool:
         results = pool.imap(do_work, items, chunksize=chunksize)
     end_t = time.perf_counter()
     wall_duration = end_t - start_t
