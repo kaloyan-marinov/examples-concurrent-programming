@@ -11,7 +11,7 @@ if __name__ == "__main__":
     for _ in range(10):
         t = threading.Thread(
             target=do_something,
-            args=(1,),
+            args=(1.2,),
         )
         t.start()
         threads.append(t)

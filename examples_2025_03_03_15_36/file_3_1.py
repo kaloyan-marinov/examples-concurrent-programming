@@ -9,11 +9,11 @@ if __name__ == "__main__":
 
     t_1 = threading.Thread(
         target=do_something,
-        args=(1,),
+        args=(1.1,),
     )
     t_2 = threading.Thread(
         target=do_something,
-        args=(1,),
+        args=(1.1,),
     )
 
     t_1.start()
