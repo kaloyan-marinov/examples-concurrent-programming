@@ -104,143 +104,103 @@ Each process has its own Python interpreter.
 
 ---
 
-7:56
-Next, let's take a look at just a few of  the ways where everything can go wrong.
-8:00
-Let's just take a look at a few different scenarios.
-8:02
-One, running normally on just a single CPU.
-8:06
-And the other running multiprocessing  using the pool stuff that we just talked about.
-8:11
-In the normal case, I'll just map the given  function `do_work` over the given set of items.
-8:15
-And then convert it to a list.
-8:17
-And in the multiprocessing case, we'll use `pool.map`.
-8:20
-Pitfall number 1
-8:21
-Trying to use multiprocessing in a situation
-8:24
-where the overhead of creating  processes and communicating between them
-8:28
-is greater than the cost of just doing the computation.
-8:31
-Suppose all we wanted was a quick calculation, like multiplying by 10.
-8:35
-Let's see how the multiprocessing and normal cases compare.
-8:38
-Using multiprocessing, it took 0.77 seconds.
-8:42
-But just doing the computation outright on a single CPU took less than 100th of a second.
-8:47
+
+<b>_a few of the ways where everything can go wrong_</b>
+
+
+
+<u>Pitfall number 1:</u>
+
+Trying to use `multiprocessing` in a situation where
+the overhead of creating processes and communicating between them
+is greater than
+the cost of just doing the computation.
+
 Creating processes and communicating between them can be very expensive.
-8:50
-So keep that in mind and only apply multiprocessing to things
-8:53
-that are already taking a long time.
-8:56
-Pitfall number 2
-8:57
+
+So keep that in mind
+and
+only apply `multiprocessing` to things that are already taking a long time.
+
+
+
+<u>Pitfall number 2:</u>
+
 Trying to send or receive something across process boundaries that's not picklable.
-9:01
-Threads share virtual memory.
-9:02
-So a variable that you create in one thread can be accessed in another thread.
-9:07
-Processes, on the other hand, have their own address space and do not share virtual memory.
-9:12
-Without specifically using something like shared memory,
-9:15
-a process cannot access variables from another process.
-9:18
-The way multiprocessing gets around this is by serializing everything using pickle.
-9:23
-It then uses an inter-process communication method like a pipe,
-9:26
-to send bytes from one process to another.
-9:29
-The takeaway is that you can't send anything that isn't picklable.
-9:32
-If you try, you'll get an error like this.
-9:34
-In this case, this lambda function, `lambda x: x + 1`, is not a picklable object.
-9:39
-Of course, the same thing goes for the result objects.
-9:41
-You can't return anything that's not picklable.
-9:44
-Pitfall number 3: Trying to send too much data.
-9:48
+
+Threads share virtual memory. So a variable that you create in one thread can be accessed in another thread.
+
+Processes, on the other hand, have their own address space and <u>do not</u> share virtual memory. Without specifically using something like shared memory, a process cannot access variables from another process.
+
+- The way `multiprocessing` gets around this is by serializing everything using `pickle`. It then uses an inter-process communication method like a `multiprocessing.Pipe` to send bytes from one process to another.
+
+- The takeaway is that you can't send anything that isn't picklable. (If you try, you'll get an error.)
+
+- Of course, the same thing goes for the result objects. You can't return anything that's not picklable.
+
+
+<u>Pitfall number 3:</u>
+
+Trying to send too much data.
+
 Remember, all the items that you're using need to be serialized and sent between processes.
-9:52
-If you have a lot of data, like NumPy arrays, then this can be a big slowdown.
-9:56
+
+If you have a lot of data, like `numpy` arrays,
+then this can be a big slowdown.
+
 Instead of passing the data from process to process,
-9:59
 consider sending a message like a string
-10:02
 that informs the other process how to create the data on its own.
-10:06
-For instance, in our audio example,
-10:08
-we didn't read the wave files here and then send them over.
-10:11
-Instead, we just passed the file name and had the separate process load the file itself.
-10:16
-Pitfall number 4
-10:17
-Using multiprocessing when there's a lot of shared computation between tasks.
-10:21
-Here's a basic Fibonacci implementation.
-10:24
-We want to compute the first ten thousand Fibonacci numbers.
-10:27
-We go ahead and try our  experiment, and what do you know?
-10:30
-Doing it on eight cores was actually faster than doing it on one.
-10:34
-But of course, we've been tricked.
-10:35
-It is a huge waste to be computing these ten thousand Fibonacci numbers
-10:39
-independent of each other since there's so much overlap.
-10:41
-If we just changed our implementation to reuse shared computation,
-10:44
-then we could compute the first ten thousand Fibonacci numbers instantly.
-10:49
-And pitfall number 5: Not optimizing the chunk size.
-10:53
-`map`, `imap`, and `imap_unordered` all take a chunk size parameter.
-10:58
-Instead of submitting each item as a separate task for the pool, items are split into chunks.
-11:04
-Then, when a worker grabs more work, it grabs an entire chunk of work.
-11:08
-Bigger chunks allow individual workers to have to take less trips back to the pool to get more work.
-11:13
-However, there's also a trade-off because a bigger chunk means
-11:16
-that you have to copy more items at once across process boundaries.
-11:21
-This could potentially cause you to run out of memory if your chunk size is too large.
-11:25
-If you're running out of memory, consider setting a smaller chunk size.
-11:28
+
+
+
+<u>Pitfall number 4:</u>
+
+Using `multiprocessing` when there's a lot of shared computation between tasks.
+
+It is a huge waste to be computing/processing/performing tasks independently of one other
+<u>provided</u> there is considerable overlap among the tasks in question.
+
+In such a situation, it <u>might</u> be worth changing the implementation in a way that re-uses shared computation.
+
+
+
+<u>Pitfall number 5:</u>
+
+Each of the `map`, `imap`, and `imap_unordered` methods
+that are available on the `multiprocessing.Pool` object
+takes a `chunksize` parameter.
+
+- Instead of submitting each item as a separate task for the pool, items are split into chunks.
+
+- Then, when a worker grabs more work, it grabs an entire chunk of work.
+
+- Bigger chunks allow individual workers to have to take fewer trips back to the pool to get more work.
+
+However, there's also a trade-off because a bigger chunk means that you have to copy more items at once across process boundaries.
+
+- This could potentially cause you to run out of memory if your `chunksize` is too large.
+
+- If you're running out of memory, consider setting a smaller `chunksize`.
+
+In summary:
+
+(a)
+So, a larger `chunksize` tends to be faster but uses more memory.
+
+(b)
+And a smaller `chunksize` uses less memory but is slower.
+
+(c)
+So, if you really want to optimize the performance as much as you reasonably can in Python,
+then don't forget to optimize the `chunksize` parameter as well.
+
+
+
+<u>Pitfall number 6:</u>
+
 And also consider using `imap` or `imap_unordered` instead of `map`.
-11:32
+
 Remember, `map` keeps all of the answers in memory in a list.
-11:35
-Whereas, `imap` and `imap_unordered` can give you results as they come in
-11:38
-rather than storing all of the results all at once.
-11:42
-So, a larger chunk size tends to be faster but uses more memory.
-11:45
-And a smaller chunk size uses less memory but is slower.
-11:49
-So, if you really want to optimize the performance as much as you reasonably can in Python,  
-11:53
-then don't forget to optimize  that chunk size parameter as well.
+
+Whereas, `imap` and `imap_unordered` can give you results as they come in rather than storing all of the results all at once.
