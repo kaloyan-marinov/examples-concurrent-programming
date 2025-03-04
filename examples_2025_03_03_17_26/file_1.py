@@ -81,12 +81,35 @@ def etl(filename: str) -> tuple[str, float]:
     return filename, end_t - start_t
 
 
+def etl_demo_serial():
+    """
+    If you open the CPU monitor from your machine's Operating System
+    and run this function,
+    you will notice that
+    only a fraction of your machine's CPU resources are utilized.
+    """
+
+    filenames = [f"sounds/example{n}.wav" for n in range(24)]
+    gen_fake_data(filenames)
+
+    start_t = time.perf_counter()
+
+    print("starting ETL")
+    for filename in filenames:
+        _, duration = etl(filename)
+        print(f"{filename} completed in {duration:.2f}s")
+
+    end_t = time.perf_counter()
+    total_duration = end_t - start_t
+    print(f"the whole ETL took {total_duration:.2f}s in total")
+
+
 def etl_demo():
     filenames = [f"sounds/example{n}.wav" for n in range(24)]
     gen_fake_data(filenames)
     start_t = time.perf_counter()
 
-    print("starting etl")
+    print("starting ETL")
     with multiprocessing.Pool() as pool:
         results = pool.map(etl, filenames)
 
@@ -95,7 +118,7 @@ def etl_demo():
 
     end_t = time.perf_counter()
     total_duration = end_t - start_t
-    print(f"etl took {total_duration:.2f}s total")
+    print(f"the whole ETL took {total_duration:.2f}s in total")
 
 
 def run_normal(items, do_work):
