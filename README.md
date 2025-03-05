@@ -2,7 +2,7 @@
 
 1. [Introduction](#introduction)
 
-2. [Background about processes and threads](#background-about-processes-and-threads)
+2. [Background](#background)
 
 3. [The Global Interpreter Lock (GIL) in CPython](#the-global-interpreter-lock-gil-in-cpython)
 
@@ -11,6 +11,27 @@
 5. [How to run the examples](#how-to-run-the-examples)
 
 6. [Bibliography](#bibliography)
+
+---
+
+Section 1 draws a distinctions
+between sequential programming and concurrent programming.
+It goes on to compare different styles of concurrent programming.
+
+At the risk of increasing this file's word count,
+Section 2 recalls the notions of processes and threads,
+which are of considerable importance in the context of computer programming.
+
+Section 3 builds on the background recalled in Section 2
+by describing the Global Interpreter Lock (GIL).
+The GIL is a feature of the _CPython_ implementation of Python.
+A good working understanding of the GIL is important
+for anyone who wishes to do concurrent programming in Python.
+
+Section 4 remarks on
+non-trivial aspects of the different styles of concurrent programming.
+
+Section 5 explains how to run the code examples within this repository.
 
 
 
@@ -64,7 +85,7 @@ It provides <u>a comparison of different styles of concurrent programming</u>:
 
 
 
-# Background about processes and threads
+# Background
 
 In the context of computer programming,
 the following notions are of considerable importance:
@@ -165,9 +186,11 @@ TBD
 
 # Remarks about non-trivial aspects of concurrent programming
 
-The preceding table compares processes, threads, and async on a number of categories.
+Recall that
+the [Introduction](#introduction) section contains a table
+that compares processes, threads, and async on a number of categories.
 
-The talk, which the preceding table is taken out of, makes
+The talk, which that table was taken out of, makes
 some remarks about non-trivial aspects of concurrent programming.
 Those remarks are as follows.
 
@@ -333,14 +356,8 @@ which contains an example of how to run that script
 ```
 
 ```
-the source for everything within `examples-concurrent-programming/examples_2025_03_03_17_26/` is:
-(
-    youtube
-    >>
-    mCoding
-    >>
-    Unlocking the CPU cores in Python (multiprocessing)
-)
+the source for everything within `examples-concurrent-programming/examples_2025_03_03_17_26/` is
+the resource in [4]
 
 each script within that folder has a docstring,
 which contains an example of how to run that script
@@ -383,3 +400,15 @@ codebasics
 )
 
 https://www.youtube.com/watch?v=oIN488Ldg9k
+
+[4]
+
+(
+YouTube
+\>>
+mCoding
+\>>
+Unlocking the CPU cores in Python (multiprocessing)
+)
+
+https://www.youtube.com/watch?v=X7vBbelRXn0
