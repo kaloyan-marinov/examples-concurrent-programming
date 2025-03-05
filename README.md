@@ -1,7 +1,7 @@
 # Introduction
 
 In the context of computer programming,
-one may draw a distinction between these categories of programming:
+the resource in [1] draws a distinction between these categories of programming:
 
 (A) <u>sequential programming</u>
 
@@ -33,14 +33,8 @@ one may draw a distinction between these categories of programming:
 
 ---
 
-At PyCon 2017, there was a talk by Miguel Grinberg
-which was called "Asynchronous Python for the Complete Beginner".
-The talk can be accessed via [this link](
-    https://www.youtube.com/watch?v=iG6fr81xHKA
-).
-
-The following table is taken out of the talk;
-it provides <u>a comparison of different styles of concurrent programming</u>:
+The following table is taken out of the resource in [2].
+It provides <u>a comparison of different styles of concurrent programming</u>:
 
 |                          | multiple processes  | multiple threads    | asynchronous programming
 | ------------------------ | ------------------- | ------------------- | ------------------------
@@ -232,3 +226,28 @@ the source for everything within `examples-concurrent-programming/examples_2025_
 each script within that folder has a docstring,
 which contains an example of how to run that script
 ```
+
+# Bibliography
+
+[1]
+
+(
+YouTube
+\>>
+Standford Scholar
+\>>
+Python: 3.2 - Multi threading
+)
+
+https://www.youtube.com/watch?v=xz3KgbftMes
+
+[2]
+
+(
+YouTube
+\>>
+PyCon 2017
+\>> Miguel Grinberg Asynchronous Python for the Complete Beginner PyCon 2017
+)
+
+https://www.youtube.com/watch?v=iG6fr81xHKA

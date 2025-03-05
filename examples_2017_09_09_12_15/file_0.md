@@ -59,8 +59,7 @@ because there is something called the Global Interpreter Lock (GIL)
 # multi-threading in Python
 
 (
-source:
-https://www.youtube.com/watch?v=xz3KgbftMes
+`./README.md` >> [1]
 )
 
 in the context of computer programming,
