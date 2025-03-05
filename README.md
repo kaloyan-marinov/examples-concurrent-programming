@@ -69,6 +69,30 @@ The preceding table compares processes, threads, and async on a number of catego
      there are no resources at the operating-system level that are used;
      so these are extremely lightweight;
 
+     (
+
+        YouTube
+        >>
+        PyCon 2016
+        >>
+        Miguel Grinberg - Flask at Scale - PyCon 2016
+        >>
+        01:02:27 - 01:12:53
+
+        https://www.youtube.com/watch?v=tdIIJuPh3SI
+     
+     ):
+     "these" refers to data structures in the Python context;
+     Python runs one thread,
+     but what runs within that thread are all those "green threads"
+     and there's a scheduler that comes with any async framework that
+     decides how to switch between all those miniature "fake threads";
+     you switch when you call certain functions;
+     if you want to trigger a switch on purpose -
+     which is sometimes necessary (e.g. the task is not I/O-bound),
+     the way to do that is to call the `sleep` function from the async framework
+     (but <u>not</u> the `time.sleep` function from the Python Standard Library);
+
 (4) W.r.t. functions from the Python Standard Library
     that are implemented as blocking functions
 
