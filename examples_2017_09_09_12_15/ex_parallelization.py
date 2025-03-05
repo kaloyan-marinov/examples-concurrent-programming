@@ -3,9 +3,6 @@ Source:     Multiprocessing in Python - Rudy Gilmore, Data Scientist, TrueCar
             https://www.youtube.com/watch?v=X2mO1O5Nuwg
 """
 
-# TODO: look into threads, processes, and Python's GIL
-
-
 from __future__ import print_function
 from __future__ import division
 
