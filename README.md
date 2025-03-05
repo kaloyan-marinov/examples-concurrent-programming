@@ -9,15 +9,15 @@ The talk can be accessed via [this link](
 The following table is taken out of the talk;
 it provides <u>a comparison of different styles/types of concurrent programming</u>:
 
-_                        | multiple processes  | multiple threads    | asynchronous programming
------------------------- | ------------------- | ------------------- | ------------------------
-Optimize waiting periods | yes                 | yes                 | yes
-_                        | (pre-emptive)       | (pre-emptive)       | (cooperative)
-Use all CPU cores        | yes                 | no                  | no
-Scalability              | low                 | medium              | high
-_                        | (ones/tens)         | (hundreds)          | (thousands+)
-Use blocking standard-library functions | yes  | yes                 | no
-GIL interference         | no                  | some                | no
+|                          | multiple processes  | multiple threads    | asynchronous programming
+| ------------------------ | ------------------- | ------------------- | ------------------------
+| Optimize waiting periods | yes                 | yes                 | yes
+|                          | (pre-emptive)       | (pre-emptive)       | (cooperative)
+| Use all CPU cores        | yes                 | no                  | no
+| Scalability              | low                 | medium              | high
+|                          | (ones/tens)         | (hundreds)          | (thousands+)
+| Use blocking standard-library functions | yes  | yes                 | no
+| GIL interference         | no                  | some                | no
 
 # How to run the examples
 
