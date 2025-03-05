@@ -30,42 +30,15 @@ And here's where we get to the big elephant in the room with Python and threads.
 
 Python - well specifically CPython - has what's called <u>the Global Interpreter Lock (GIL)</u>.
 
-> A lock is a synchronization primitive that,
-> in concurrent programming based on multiple threads,
-> prevents different threads from accessing the same data at the same time.
->
-> In particular, to prevent one thread from reading or writing some data
-> while another thread is writing to it,
-> only one thread can acquire this lock at a time,
-> which is ensured by your operating system and by your actual hardware.
->
-> If two threads are trying to access the same data at the same time,
-> (a) one of them will get the lock first, and it's able to do its thing;
-> (b) then it releases the lock;
-> and (c) the other one can grab it.
-
-Well, as the name suggests,
-the Global Interpreter Lock is
-<u>a global lock around the entire Python interpreter</u>.
-
-In order to advance the Python interpreter state and run any Python code,
-a thread must acquire the GIL.
-
-So, while it's possible to have multiple threads in the same Python process,
-only one of those threads can actually be executing any Python code. (While that's happening, all the other threads just have to sit around and wait.)
-
 Now, we did still get some speedup here.
 
 And the reason for that is simple.
-
-You only need to acquire the GIL to run Python code.
-Your Python code can then call out
-to C code or other external code that
-doesn't care about the Python interpreter;
-during that time, it can
-(A) drop the GIL,
-(B) let another Python thread do its thing,
-and (C) wait on that C code to finish simultaneously.
+[
+A thread only needs to acquite the GIL to run Python code;
+if it calls out to external code that doesn't care about the Python interpreter,
+the thread in question can and does release the GIL,
+which in turn allows another thread to acquire the GIL and execute its own instructions.
+]
 
 (
 For example:

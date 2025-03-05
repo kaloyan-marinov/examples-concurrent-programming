@@ -5,9 +5,6 @@ source:
 https://www.youtube.com/watch?v=PJ4t2U15ACo
 )
 
-- is a little special
-because there is something called the Global Interpreter Lock (GIL)
-
 - the GIL _might_ prevent you from reaping the true benefits of multi-threading
 
 - might still be beneficial - e.g. when you are
@@ -54,14 +51,6 @@ concurrent programming
    - computers with multiple-core CPUs
      can actually run
      multiple instructions simultaneously
-
-   - but:
-     the _CPython_ implementation of Python
-     has a feature called the Global Interpreter Lock (GIL),
-     which limits a threaded Python program to run on only one core
-     (allowing only one thread/task to be executed at a time;
-     therefore, in order to give the illusion of multi-tasking,
-     threaded Python programs must rapidly switch between threads)
 
 multi-threading
 
