@@ -19,9 +19,13 @@ it provides <u>a comparison of different styles/types of concurrent programming<
 | Use blocking standard-library functions | yes  | yes                 | no
 | GIL interference         | no                  | some                | no
 
-# Remarks about the non-trivial points
+# Remarks about non-trivial aspects of concurrent programming
 
 The preceding table compares processes, threads, and async on a number of categories.
+
+The talk, which the preceding table is taken out of, makes
+some remarks about non-trivial aspects of concurrent programming.
+Those remarks are as follows.
 
 (1) "Non-blocking, doing something while a task waits" is NOT exclusive to async.
 
