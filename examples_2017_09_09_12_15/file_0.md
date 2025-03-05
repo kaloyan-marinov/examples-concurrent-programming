@@ -114,9 +114,9 @@ multi-threading
      - may communicate (important) information
        to each other or to the main program
        in several ways;
-	   some of those ways are by:
-	   (a) creating Events;
-	   (b) passing information as arguments;
+	     some of those ways are by:
+	     (a) creating Events;
+	     (b) passing information as arguments;
 
    - pros
 
