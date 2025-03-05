@@ -4,11 +4,13 @@
 
 2. [Background about processes and threads](#background-about-processes-and-threads)
 
-3. [Remarks about non-trivial aspects of concurrent programming](#remarks-about-non-trivial-aspects-of-concurrent-programming)
+3. [The Global Interpreter Lock (GIL) in CPython](#the-global-interpreter-lock-gil-in-cpython)
 
-4. [How to run the examples](#how-to-run-the-examples)
+4. [Remarks about non-trivial aspects of concurrent programming](#remarks-about-non-trivial-aspects-of-concurrent-programming)
 
-5. [Bibliography](#bibliography)
+5. [How to run the examples](#how-to-run-the-examples)
+
+6. [Bibliography](#bibliography)
 
 
 
@@ -108,6 +110,12 @@ Differences between processes and threads:
 	 the execution of another process
 
    - that is not necessarily the case for threads
+
+
+# The Global Interpreter Lock (GIL) in CPython
+
+TBD
+
 
 
 # Remarks about non-trivial aspects of concurrent programming
