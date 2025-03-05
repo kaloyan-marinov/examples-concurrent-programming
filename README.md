@@ -1,5 +1,38 @@
 # Introduction
 
+In the context of computer programming,
+one may draw a distinction between these categories of programming:
+
+(A) <u>sequential programming</u>
+
+   - the program runs in a known/deterministic/"stable" order,
+     <b>_one statement at a time_</b>
+
+(B) <u>concurrent programming</u>
+
+   - the program runs in a way that allows it to "do multi-tasking"
+
+   - the reason for the quotation marks in the preceding bulletpoint
+     is that
+     there are different subcategories/types/styles of concurrent programming;
+     depending
+     on the style used to implement a computer program
+     and
+     on the hardware used to run the computer program,
+     one of two things can take place:
+
+     <b>_EITHER the hardware simply gives the illusion of doing multi-tasking,_</b>
+
+     <b>_OR the hardware actually does run multiple instructions simultaneously_</b>
+
+   - be advised that,
+     even if the hardware simply gives the illusion of doing multi-tasking,
+     the time required to run a program based on concurrency techniques
+     _might_ be less than
+     the time required to run an equivalent program based on the sequential technique
+
+---
+
 At PyCon 2017, there was a talk by Miguel Grinberg
 which was called "Asynchronous Python for the Complete Beginner".
 The talk can be accessed via [this link](
@@ -7,7 +40,7 @@ The talk can be accessed via [this link](
 ).
 
 The following table is taken out of the talk;
-it provides <u>a comparison of different styles/types of concurrent programming</u>:
+it provides <u>a comparison of different styles of concurrent programming</u>:
 
 |                          | multiple processes  | multiple threads    | asynchronous programming
 | ------------------------ | ------------------- | ------------------- | ------------------------

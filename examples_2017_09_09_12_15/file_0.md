@@ -80,18 +80,14 @@ analogy (by comparing a computer program to a bee hive)
 
       - but maintains its own local variables and code blocks
 
-sequential programming (aka single-threading)
 
-   - the program runs in a known and stable order, i.e. one statement at a time
-
-   - this approach is simpler but often slower
 
 concurrent programming
 
    - can be achieved in various ways,
      one of which is multi-threading
 
-   - allows programs to do multi-tasking -
+   - a multi-threaded program can do multi-tasking -
      but, on a computer with only one CPU, this is simply an illusion
 
    - this _may_ achieved by assigning each task to a thread
