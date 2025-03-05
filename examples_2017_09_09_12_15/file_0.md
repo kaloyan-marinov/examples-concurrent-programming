@@ -64,7 +64,7 @@ https://www.youtube.com/watch?v=xz3KgbftMes
 )
 
 in the context of computer programming,
-*a thread* is short for *a thread of execution*
+<u>a thread</u> is short for <u>a thread of execution</u>
 
 analogy (by comparing a computer program to a bee hive)
 
@@ -141,9 +141,9 @@ multi-threading
 
    - must safeguard against threads modifying sections of the same code
      in multiple places or in an undesired order;
-     in programming, this is called *synchronization*
+     in programming, this is called <u>synchronization</u>
 
-   - a *lock* is a synchronization mechanism
+   - a <u>lock</u> is a synchronization mechanism
      for enforcing access to a sensitive/critical areas of the program code such as:
 
        shared memory
