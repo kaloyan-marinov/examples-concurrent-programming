@@ -65,19 +65,6 @@ concurrent programming
 
 multi-threading
 
-   - threads
-
-     - are spawned by the main program
-
-     - may interrupt each other
-
-     - may communicate (important) information
-       to each other or to the main program
-       in several ways;
-	     some of those ways are by:
-	     (a) creating Events;
-	     (b) passing information as arguments;
-
    - pros
 
      - more responsive UIs
@@ -93,30 +80,3 @@ multi-threading
 
      - can add complexities and severe debugging headaches
        (because of its non-deterministic nature)
-
-   - must safeguard against threads modifying sections of the same code
-     in multiple places or in an undesired order;
-     in programming, this is called <u>synchronization</u>
-
-   - a <u>lock</u> is a synchronization mechanism
-     for enforcing access to a sensitive/critical areas of the program code such as:
-
-       shared memory
-
-       global data/variables
-
-   ```python
-   # Thread 1
-   x = 0
-   x_lock = threading.Lock()
-   with x_lock:
-      x = x + 1 # critical section
-
-
-
-   # Thread 2
-   x = 0
-   x_lock = threading.Lock()
-   with x_lock:
-      x = x - 2 # critical section
-   ```

@@ -70,7 +70,7 @@ In the context of computer programming,
 the following notions are of considerable importance:
 <u>processes</u> and <u>threads (of execution)</u>.
 
-What follows is taken out of [3].
+What follows is taken out of the resource in [3].
 
 To get our bearings,
 let us begin by pointing out a commonality between processes and threads:
@@ -110,6 +110,51 @@ Differences between processes and threads:
 	 the execution of another process
 
    - that is not necessarily the case for threads
+
+---
+
+The resource in [1] makes some additionals points about threads.
+Those points are as follows.
+
+   - threads are spawned by a main program
+
+   - threads may interrupt one another
+
+   - threads may communicate (important) information
+     to one another or to the main program in several ways;
+     some of those ways are by:
+     (a) creating "events";
+     (b) passing information as arguments;
+
+   - threads must safeguard against modifying the same code
+     in multiple places or in an undesired order;
+     that is called <u>synchronization</u>
+
+   - <u>a lock</u> is a synchronization mechanism
+     for enforcing access to sensitive/critical areas of program code -
+     such as:
+
+        - shared memory
+
+        - global data/variables
+
+      ```python
+      # Thread 1
+      x = 0
+      x_lock = threading.Lock()
+      with x_lock:
+          x = x + 1 # critical section
+
+
+
+      # Thread 2
+      x = 0
+      x_lock = threading.Lock()
+      with x_lock:
+          x = x - 2 # critical section
+      ```
+
+
 
 
 # The Global Interpreter Lock (GIL) in CPython
