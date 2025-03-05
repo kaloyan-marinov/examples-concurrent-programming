@@ -1,3 +1,26 @@
+# Introduction
+
+At PyCon 2017, there was a talk by Miguel Grinberg
+which was called "Asynchronous Python for the Complete Beginner".
+The talk can be accessed via [this link](
+    https://www.youtube.com/watch?v=iG6fr81xHKA
+).
+
+The following table is taken out of the talk;
+it provides <u>a comparison of different styles/types of concurrent programming</u>:
+
+_                        | multiple processes  | multiple threads    | asynchronous programming
+------------------------ | ------------------- | ------------------- | ------------------------
+Optimize waiting periods | yes                 | yes                 | yes
+_                        | (pre-emptive)       | (pre-emptive)       | (cooperative)
+Use all CPU cores        | yes                 | no                  | no
+Scalability              | low                 | medium              | high
+_                        | (ones/tens)         | (hundreds)          | (thousands+)
+Use blocking standard-library functions | yes  | yes                 | no
+GIL interference         | no                  | some                | no
+
+# How to run the examples
+
 ```bash
 examples-concurrent-programming $ python3 --version
 Python 3.8.3
