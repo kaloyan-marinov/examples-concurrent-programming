@@ -1,162 +1,167 @@
-multi-processing vs. multithreading
+# multi-processing vs. multithreading
+
 (
 source:
 https://www.youtube.com/watch?v=oIN488Ldg9k
 )
 
-	commonality
+commonality
 
-		both are ways of achieving multi-tasking
+   - both are ways of achieving multi-tasking
 
-	a process
+a process
 
-		has its own memory within address space
+   - has its own memory within address space
 
-		constitutes an environment,
-		within which multiple threads (of execution) can live
+   - constitutes an environment,
+     within which multiple threads (of execution) can live
 
-		has the property that
-		all its threads of execution will share the process's address space
-		(but each thread has its own stack memory and its own set of instructions) -
-		global variables defined in the program and heap memory
-		can all be accessed by each thread
+   - has the property that
+	 all its threads of execution will share the process's address space
+     (but each thread has its own stack memory and its own set of instructions) -
+	 global variables defined in the program and heap memory
+	 can all be accessed by each thread
 
-	how do process communicate with each other?
+how do processes communicate with each other?
 
-		a file on the disk
+   - a file on the disk
 
-		shared memory
+   - shared memory
 
-		message pipe
+   - message pipe
 
-	another difference:
+another difference:
 
-		an error or memory leak in one process
-		will not hurt
-		the execution of another process
+   - an error or memory leak in one process
+     will not hurt
+	 the execution of another process
 
-		this is not necessarily the case for threads
+   - this is not necessarily the case for threads
 
-multi-threading in the _CPython_ implementation of Python
+# multi-threading in the _CPython_ implementation of Python
+
 (
 source:
 https://www.youtube.com/watch?v=PJ4t2U15ACo
 )
 
-	is a little special
-	because there is something called the Global Interpreter Lock (GIL)
+- is a little special
+because there is something called the Global Interpreter Lock (GIL)
 
-	the GIl _might_ prevent you from reaping the true benefits of multi-threading
+- the GIL _might_ prevent you from reaping the true benefits of multi-threading
 
-	might still be used when you are
+- might still be beneficial - e.g. when you are
 
-		waiting
+  - waiting
 
-		using I/O-bound operations
+  - using I/O-bound operations
 	
+# multi-threading in Python
 
-multi-threading in Python
 (
 source:
 https://www.youtube.com/watch?v=xz3KgbftMes
 )
 
-	"a thread" in CS is short for "a thread of execution"
+in the context of computer programming,
+*a thread* is short for *a thread of execution*
 
-	analogy (by comparing a computer program to a bee hive)
+analogy (by comparing a computer program to a bee hive)
 
-		the main program (or thread)
+   - the main program (or thread)
 
-			acts as the queen bee
+      - acts as the queen bee
 
-			assigns jobs to worker bee
+      - assigns jobs to worker bee
 
-	each thread
+   - each thread
 
-		shares access to the program's global variables
+      - shares access to the program's global variables
 
-		but maintains its own local variables and code blocks
+      - but maintains its own local variables and code blocks
 
-	sequential programming (aka single-threading)
+sequential programming (aka single-threading)
 
-		the program runs in a known and stable order, i.e. one statement at a time
+   - the program runs in a known and stable order, i.e. one statement at a time
 
-		this approach is simpler but often slower
+   - this approach is simpler but often slower
 
-	concurrent programming
+concurrent programming
 
-		includes multi-threading
+   - can be achieved in various ways,
+     one of which is multi-threading
 
-		allows programs to do multi-tasking -
-		but, on a computer with only one CPU, this is simply an illusion
+   - allows programs to do multi-tasking -
+     but, on a computer with only one CPU, this is simply an illusion
 
-		this is achieved by assigning each task to a thread
+   - this _may_ achieved by assigning each task to a thread
 
-		computers with multiple-core CPUs
-		can actually run
-		multiple instructions simultaneously
+   - computers with multiple-core CPUs
+     can actually run
+     multiple instructions simultaneously
 
-		but:
-		the _CPython_ implementation of Python
-		has a feature called the Global Interpreter Lock (GIL),
-		which limits a threaded Python program to run on only one core
-		(allowing only one thread/task to be executed at a time;
-		therefore, in order to give the illusion of multi-tasking,
-		threaded Python programs must rapidly switch between threads)
+   - but:
+     the _CPython_ implementation of Python
+     has a feature called the Global Interpreter Lock (GIL),
+     which limits a threaded Python program to run on only one core
+     (allowing only one thread/task to be executed at a time;
+     therefore, in order to give the illusion of multi-tasking,
+     threaded Python programs must rapidly switch between threads)
 
-	multi-threading
+multi-threading
 
-		threads
+   - threads
 
-			are spawned by the main program
+     - are spawned by the main program
 
-			may interrupt each other
+     - may interrupt each other
 
-			may communicate (important) information
-			to each other or to the main program
-			by
+     - may communicate (important) information
+       to each other or to the main program
+       in several ways;
+	   some of those ways are by:
+	   (a) creating Events;
+	   (b) passing information as arguments;
 
-				creating Events
+   - pros
 
-				passing information as arguments
+     - more responsive UIs
 
-		pros
+     - simpler program design (by separating tasks into independent thread bodies)
 
-			more responsive UIs
+     - threads can act independently of one another
 
-			simpler program design (by separating tasks into independent thread bodies)
+   - cons
 
-			threads can act independently of one another
+     - faux-parallelism in Python (due to the GIL) :
+       _might_ not benefit from any speed improvements
 
-		cons
+     - can add complexities and severe debugging headaches
+       (because of its non-deterministic nature)
 
-			faux-parallelism in Python (due to the GIL) :
-			_might_ not benefit from any speed improvements
+   - must safeguard against threads modifying sections of the same code
+     in multiple places or in an undesired order;
+     in programming, this is called *synchronization*
 
-			can add complexities and severe debugging headaches
-			(because of its non-deterministic nature)
+   - a *lock* is a synchronization mechanism
+     for enforcing access to a sensitive/critical areas of the program code such as:
 
-		must safeguard against threads modifying sections of the same code
-		in multiple places or in an undesired order;
-		in programming, this is called *synchronization*
+       shared memory
 
-		a *lock* is a synchronization mechanism
-		for enforcing access to a sensitive/critical areas of the program code such as:
+       global data/variables
 
-			shared memory
+   ```python
+   # Thread 1
+   x = 0
+   x_lock = threading.Lock()
+   with x_lock:
+      x = x + 1 # critical section
 
-			global data/variables
 
-		thread_1
-		--------
-		x = 0
-		x_lock = threading.Lock()
-		with x_lock:
-			x = x + 1 # critical section
 
-		thread_2
-		--------
-		x = 0
-		x_lock = threading.Lock()
-		with x_lock:
-			x = x - 2 # critical section
+   # Thread 2
+   x = 0
+   x_lock = threading.Lock()
+   with x_lock:
+      x = x - 2 # critical section
+   ```
