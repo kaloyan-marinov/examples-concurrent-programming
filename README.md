@@ -19,6 +19,89 @@ it provides <u>a comparison of different styles/types of concurrent programming<
 | Use blocking standard-library functions | yes  | yes                 | no
 | GIL interference         | no                  | some                | no
 
+# Remarks about the non-trivial points
+
+The preceding table compares processes, threads, and async on a number of categories.
+
+(1) "Non-blocking, doing something while a task waits" is NOT exclusive to async.
+
+   - processes and threads can do that pretty well too
+
+   - in the case of processes,
+     it's the operating system doing it;
+     that is what the term **_pre-emptive_** stands for
+
+   - in the case of threads,
+     it's the operating system doing it;
+     once again,
+     that is what the term **_pre-emptive_** stands for
+
+   - in the case of async,
+     it's your chosen async framework (e.g. `asyncio`, `gevent`, `eventlet`) doing it;
+
+(2) Many time people combine processes with one of the other two,
+    which is actually a pretty good idea.
+
+   - you create a multi-threaded program or an async program
+
+   - you run that program as many as times as CPU cores you have
+
+(3) The category about scalability is an interesting one.
+
+   - if you're running multiple processes,
+     each process will have
+     (a) a copy of the Python interpreter; plus
+     (b) all the resources that it uses; plus
+     (c) a copy of your code, your application; plus
+     (d) all the resources that you use;
+     so, all of that is going to be duplicated
+    
+     so, if you start new instances,
+     you're going to find that
+     pretty soon you're going to probably run out of memory
+     for the following reason:
+     you cannot run a lot of Python processes on a normal computer
+
+   - threads are a little bit more lightweight than processes;
+     you can instantiate much more threads than processes;
+
+   - async is done all in Python space;
+     there are no resources at the operating-system level that are used;
+     so these are extremely lightweight;
+
+(4) W.r.t. functions from the Python Standard Library
+    that are implemented as blocking functions
+
+   - processes and threads can use those functions without a problem
+     (because the operating system knows how to deal with those)
+
+   - since the async style of concurrent programming
+     is enabled by your chosen async framework
+     (rather than by the operating system),
+     your program <u>has to</u> use
+     the framework's replacements for the blocking standard-library functions
+     (instead of those standard-library functions)
+
+(5) GIL interference
+
+   - the GIL causes some problems with threads
+
+   - there are a lot of applications that are not affected by the GIL, namely
+     (a) those that do not use threads, or
+     (b) those that do use use threads but are mostly I/O-bound
+
+if you have threads that are blocked on I/O, they don't hold the GIL;
+so, if a thread goes to wait,
+the operating system will be able to give access to another thread without any problems
+
+the best argument for going with the async style of concurrent programming is
+when you need <u>massive scaling</u>
+(
+so this will be servers that are going to be very busy;
+want to handle lots of clients without having to buy more hosting,
+which can become very expensive very quickly
+)
+
 # How to run the examples
 
 ```bash
