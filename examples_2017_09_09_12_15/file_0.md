@@ -11,7 +11,7 @@ commonality
 
 a process
 
-   - has its own memory within address space
+   - has its own virtual memory or an address space
 
    - constitutes an environment,
      within which multiple threads (of execution) can live
