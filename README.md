@@ -1,7 +1,21 @@
+# Table of contents
+
+1. [Introduction](#introduction)
+
+2. [Background about processes and threads](#background-about-processes-and-threads)
+
+3. [Remarks about non-trivial aspects of concurrent programming](#remarks-about-non-trivial-aspects-of-concurrent-programming)
+
+4. [How to run the examples](#how-to-run-the-examples)
+
+5. [Bibliography](#bibliography)
+
+
+
 # Introduction
 
 In the context of computer programming,
-the resource in [1] draws a distinction between these categories of programming:
+the resource in [1] draws a distinction between these types of programming:
 
 (A) <u>sequential programming</u>
 
@@ -14,7 +28,7 @@ the resource in [1] draws a distinction between these categories of programming:
 
    - the reason for the quotation marks in the preceding bulletpoint
      is that
-     there are different subcategories/types/styles of concurrent programming;
+     there are different subtypes/styles of concurrent programming;
      depending
      on the style used to implement a computer program
      and
@@ -45,6 +59,14 @@ It provides <u>a comparison of different styles of concurrent programming</u>:
 |                          | (ones/tens)         | (hundreds)          | (thousands+)
 | Use blocking standard-library functions | yes  | yes                 | no
 | GIL interference         | no                  | some                | no
+
+
+
+# Background about processes and threads
+
+TBD
+
+
 
 # Remarks about non-trivial aspects of concurrent programming
 
@@ -157,6 +179,8 @@ want to handle lots of clients without having to buy more hosting,
 which can become very expensive very quickly
 )
 
+
+
 # How to run the examples
 
 ```bash
@@ -226,6 +250,8 @@ the source for everything within `examples-concurrent-programming/examples_2025_
 each script within that folder has a docstring,
 which contains an example of how to run that script
 ```
+
+
 
 # Bibliography
 
