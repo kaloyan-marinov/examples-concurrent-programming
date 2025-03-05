@@ -35,12 +35,12 @@ the resource in [1] draws a distinction between these types of programming:
      on the hardware used to run the computer program,
      one of two things can take place:
 
-     <b>_EITHER the hardware simply gives the illusion of doing multi-tasking,_</b>
+     <b>_EITHER the hardware simply gives the illusion of "doing multi-tasking",_</b>
 
      <b>_OR the hardware actually does run multiple instructions simultaneously_</b>
 
    - be advised that,
-     even if the hardware simply gives the illusion of doing multi-tasking,
+     even if the hardware simply gives the illusion of "doing multi-tasking",
      the time required to run a program based on concurrency techniques
      _might_ be less than
      the time required to run an equivalent program based on the sequential technique
@@ -64,8 +64,50 @@ It provides <u>a comparison of different styles of concurrent programming</u>:
 
 # Background about processes and threads
 
-TBD
+In the context of computer programming,
+the following notions are of considerable importance:
+<u>processes</u> and <u>threads (of execution)</u>.
 
+What follows is taken out of [3].
+
+To get our bearings,
+let us begin by pointing out a commonality between processes and threads:
+both are ways of "doing multi-tasking".
+
+A process:
+
+   - is a computing construct
+     that represents an environment (or a context),
+     within which a computer program is executed
+
+   - has its own virtual memory or an address space
+
+Threads:
+
+   - are computing constructs that exist within a process
+
+   - share their encompassing process's address space,
+     but each thread has its own stack memory and its own set of instructions
+
+   - can access global variables defined in the program
+
+   - can access heap memory
+
+How do process communicate with each other?
+
+   - a file on disk
+
+   - shared memory
+
+   - message pipe
+
+Differences between processes and threads:
+
+   - an error or memory leak in one process
+     will not hurt
+	 the execution of another process
+
+   - that is not necessarily the case for threads
 
 
 # Remarks about non-trivial aspects of concurrent programming
@@ -277,3 +319,14 @@ PyCon 2017
 )
 
 https://www.youtube.com/watch?v=iG6fr81xHKA
+
+[3]
+
+(
+YouTube
+\>>
+codebasics
+\>> Difference between Multiprocessing and Multithreading
+)
+
+https://www.youtube.com/watch?v=oIN488Ldg9k
